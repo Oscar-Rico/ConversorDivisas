@@ -14,6 +14,16 @@ const currencies = {
   CAD: { name: "Dólar canadiense", flag: "ca", group: "secondary" },
   AUD: { name: "Dólar australiano", flag: "au", group: "secondary" },
   CNY: { name: "Yuan chino", flag: "cn", group: "secondary" },
+  TRY: { name: "Lira turca", flag: "tr", group: "secondary" },
+  PLN: { name: "Zloty polaco", flag: "pl", group: "secondary" },
+  HUF: { name: "Florín húngaro", flag: "hu", group: "secondary" },
+  PEN: { name: "Sol peruano", flag: "pe", group: "secondary" },
+  BRL: { name: "Real brasileño", flag: "br", group: "secondary" },
+  NGN: { name: "Naira nigeriana", flag: "ng", group: "secondary" },
+  ZAR: { name: "Rand sudafricano", flag: "za", group: "secondary" },
+  INR: { name: "Rupia india", flag: "in", group: "secondary" },
+  THB: { name: "Baht tailandés", flag: "th", group: "secondary" },
+  NZD: { name: "Dólar neozelandés", flag: "nz", group: "secondary" },
 };
 
 const currencyCodes = Object.keys(currencies);
