@@ -1,0 +1,156 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#f5f7f5">
+  <meta name="description" content="Convierte euros, dólares, libras y otras divisas fácilmente con cotizaciones actualizadas.">
+  <title>Cambio claro — Conversor de divisas</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+  <script src="main.js" defer></script>
+</head>
+<body>
+  <header class="site-header">
+    <div class="container header-inner">
+      <a class="brand" href="#inicio" aria-label="Cambio claro, inicio">
+        <span class="brand-mark" aria-hidden="true">
+          <svg viewBox="0 0 40 40" fill="none"><path d="M8 13h22l-5-5m7 19H10l5 5" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/><circle cx="20" cy="20" r="17" stroke="currentColor" stroke-width="1.5"/></svg>
+        </span>
+        <span class="brand-name">cambio<span>claro</span></span>
+      </a>
+      <div class="header-note"><span class="status-dot" aria-hidden="true"></span> Tipos de cambio del día</div>
+    </div>
+  </header>
+
+  <main class="container" id="inicio">
+    <section class="intro" aria-labelledby="page-title">
+      <p class="eyebrow"><span aria-hidden="true">✳</span> TU CONVERSOR DE DIVISAS</p>
+      <h1 id="page-title">Un cambio. <span>Todo claro.</span></h1>
+      <p class="intro-copy">Escribe una cantidad y descubre al instante cuánto vale en las principales monedas del mundo.</p>
+    </section>
+
+    <section class="converter-panel" aria-labelledby="converter-title">
+      <div class="panel-heading">
+        <div>
+          <p class="eyebrow">RÁPIDO Y SENCILLO</p>
+          <h2 id="converter-title">¿Cuánto quieres convertir?</h2>
+        </div>
+        <button class="refresh-button" id="refresh-rates" type="button" aria-label="Actualizar cotizaciones">
+          <svg viewBox="0 0 20 20" fill="none" aria-hidden="true"><path d="M16.2 8A6.5 6.5 0 0 0 4.7 5.7L3 7.5m0 0V3.8m0 3.7h3.7M3.8 12A6.5 6.5 0 0 0 15.3 14.3l1.7-1.8m0 0v3.7m0-3.7h-3.7" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          <span>Actualizar</span>
+        </button>
+      </div>
+
+      <form class="converter-form" id="converter-form" novalidate>
+        <div class="amount-field">
+          <label for="amount-input">Cantidad</label>
+          <div class="input-shell">
+            <input id="amount-input" name="amount" type="text" inputmode="decimal" autocomplete="off" spellcheck="false" value="1" aria-describedby="amount-hint amount-error">
+            <span class="input-currency" id="input-currency-symbol" aria-hidden="true">€</span>
+          </div>
+          <p class="field-hint" id="amount-hint">Puedes escribir con coma o punto decimal.</p>
+          <p class="field-error" id="amount-error" aria-live="polite"></p>
+        </div>
+
+        <div class="currency-field">
+          <label for="base-currency">Convertir desde</label>
+          <div class="select-shell">
+            <span class="currency-flag" id="base-currency-flag" aria-hidden="true"></span>
+            <select id="base-currency" name="currency" aria-label="Divisa de origen">
+              <optgroup label="Divisas principales">
+                <option value="USD">Dólar estadounidense · USD</option>
+                <option value="EUR" selected>Euro · EUR</option>
+                <option value="GBP">Libra esterlina · GBP</option>
+                <option value="CHF">Franco suizo · CHF</option>
+                <option value="CZK">Corona checa · CZK</option>
+              </optgroup>
+              <optgroup label="Divisas secundarias">
+                <option value="DKK">Corona danesa · DKK</option>
+                <option value="SEK">Corona sueca · SEK</option>
+                <option value="NOK">Corona noruega · NOK</option>
+                <option value="RUB">Rublo ruso · RUB</option>
+                <option value="JPY">Yen japonés · JPY</option>
+                <option value="MXN">Peso mexicano · MXN</option>
+                <option value="HKD">Dólar de Hong Kong · HKD</option>
+                <option value="CAD">Dólar canadiense · CAD</option>
+                <option value="AUD">Dólar australiano · AUD</option>
+                <option value="CNY">Yuan chino · CNY</option>
+              </optgroup>
+            </select>
+            <svg class="select-chevron" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="m4 6 4 4 4-4" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </div>
+          <p class="field-hint" id="base-currency-name">Euro</p>
+        </div>
+
+        <button class="convert-button" type="submit">
+          Convertir <span aria-hidden="true">→</span>
+        </button>
+      </form>
+
+      <div class="rate-status" id="rate-status" role="status" aria-live="polite" aria-atomic="true">
+        <span class="status-spinner" aria-hidden="true"></span>
+        <span id="rate-status-text">Cargando cotizaciones actuales…</span>
+      </div>
+    </section>
+
+    <section class="results" aria-labelledby="results-title">
+      <div class="results-heading">
+        <div>
+          <p class="eyebrow">EL RESTO, DE UN VISTAZO</p>
+          <h2 id="results-title">Tus conversiones</h2>
+        </div>
+        <div class="results-controls">
+          <span class="result-count" id="result-count">—</span>
+          <div class="view-switch" role="group" aria-label="Modo de visualización">
+            <button class="view-button is-active" type="button" data-view="cards" aria-pressed="true" aria-label="Ver en cajas">
+              <svg viewBox="0 0 16 16" fill="none" aria-hidden="true"><rect x="2" y="2" width="5" height="5" rx="1" stroke="currentColor" stroke-width="1.4"/><rect x="9" y="2" width="5" height="5" rx="1" stroke="currentColor" stroke-width="1.4"/><rect x="2" y="9" width="5" height="5" rx="1" stroke="currentColor" stroke-width="1.4"/><rect x="9" y="9" width="5" height="5" rx="1" stroke="currentColor" stroke-width="1.4"/></svg>
+              <span>Cajas</span>
+            </button>
+            <button class="view-button" type="button" data-view="table" aria-pressed="false" aria-label="Ver en tabla">
+              <svg viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M2 4h12M2 8h12M2 12h12" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/><circle cx="4" cy="4" r=".7" fill="currentColor"/><circle cx="4" cy="8" r=".7" fill="currentColor"/><circle cx="4" cy="12" r=".7" fill="currentColor"/></svg>
+              <span>Tabla</span>
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <div id="results-content" aria-live="polite" aria-busy="true">
+        <div id="results-empty" class="results-empty">Cargando las últimas cotizaciones…</div>
+        <div id="cards-view">
+          <div class="currency-group">
+            <div class="group-heading"><h3>Divisas principales</h3><span id="primary-count">0</span></div>
+            <div class="currency-grid" id="primary-results"></div>
+          </div>
+          <div class="currency-group">
+            <div class="group-heading"><h3>Divisas secundarias</h3><span id="secondary-count">0</span></div>
+            <div class="currency-grid" id="secondary-results"></div>
+          </div>
+        </div>
+        <div class="table-scroll" id="table-view" hidden>
+          <table class="currency-table">
+            <thead>
+              <tr><th scope="col">Divisa</th><th scope="col">Conversión</th><th id="table-rate-heading" scope="col">Cambio (1 EUR)</th></tr>
+            </thead>
+            <tbody id="table-results"></tbody>
+          </table>
+        </div>
+      </div>
+    </section>
+
+    <aside class="notice">
+      <span class="notice-icon" aria-hidden="true">i</span>
+      <p>Las cotizaciones son orientativas y se actualizan a diario. El tipo aplicado por bancos y proveedores puede variar.</p>
+    </aside>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container footer-inner">
+      <span>Hecho para que las cuentas salgan claras.</span>
+      <span>Datos de <a href="https://www.exchangerate-api.com" target="_blank" rel="noreferrer">ExchangeRate-API</a></span>
+    </div>
+  </footer>
+</body>
+</html>
